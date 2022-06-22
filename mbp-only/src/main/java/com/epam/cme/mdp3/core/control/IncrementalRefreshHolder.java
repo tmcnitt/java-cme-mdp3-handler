@@ -43,7 +43,7 @@ public class IncrementalRefreshHolder {
             this.incrPcktSeqNum = queueEntry.incrPcktSeqNum;
 
             if (store.capacity() < entrySize) {
-                store.release();
+                store.releaseLast();
                 store = NativeBytesStore.nativeStoreWithFixedCapacity(entrySize);
             }
             incrEntry.buffer().copyTo(incrEntry.getAbsoluteEntryOffset(), this.store, entrySize);
@@ -81,6 +81,6 @@ public class IncrementalRefreshHolder {
 
     public void release() {
         rptSeqNumHolder = 0;
-        this.store.release();
+        this.store.releaseLast();
     }
 }

@@ -34,7 +34,7 @@ public class PacketHolder {
             packetSize = mdpPacket.getPacketSize();
 
             if (store.capacity() < packetSize) {
-                store.release();
+                store.releaseLast();
                 store = NativeBytesStore.nativeStoreWithFixedCapacity(packetSize);
             }
             mdpPacket.buffer().copyTo(this.store);
@@ -65,6 +65,6 @@ public class PacketHolder {
 
     public void release() {
         seqNumHolder = 0;
-        this.store.release();
+        this.store.releaseLast();
     }
 }

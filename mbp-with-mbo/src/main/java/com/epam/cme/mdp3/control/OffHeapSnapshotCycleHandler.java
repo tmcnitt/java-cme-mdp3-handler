@@ -132,7 +132,7 @@ public class OffHeapSnapshotCycleHandler implements SnapshotCycleHandler {
         }
 
         public void reInit(long length){
-            bytes.release();
+            bytes.releaseLast();
             this.bytes = NativeBytesStore.nativeStore(length * Long.BYTES);
             this.length = length;
         }
